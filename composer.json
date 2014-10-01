@@ -1,0 +1,25 @@
+{
+    "name": "compwright/disqus-demo",
+    "description": "Demo project for AtlantaPHP October 2014 talk, \"Building for Success and Failure  With Disqus\"",
+    "require": {
+        "php": ">=5.4",
+        "compwright/disqus-cli": "*",
+        "vlucas/phpdotenv": "~1.0",
+        "slim/slim": "2.*"
+    },
+    "require-dev": {
+        "compwright/disguz": "dev-master",
+        "devster/ubench": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathon Hill",
+            "email": "jhill9693@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "compwright\\DisqusDemo\\": ["src/"] }
+    }
+}
