@@ -5,7 +5,8 @@
         "php": ">=5.4",
         "compwright/disqus-cli": "*",
         "vlucas/phpdotenv": "~1.0",
-        "slim/slim": "2.*"
+        "slim/slim": "2.*",
+        "aura/cli": "2.*"
     },
     "require-dev": {
         "compwright/disguz": "dev-master",
@@ -20,6 +21,9 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "compwright\\DisqusDemo\\": ["src/"] }
+        "psr-4": {
+            "compwright\\DisqusDemo\\": ["src/"],
+            "compwright\\Guzzle\\": ["src/Guzzle/"]
+        }
     }
 }

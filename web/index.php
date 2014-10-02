@@ -1,14 +1,18 @@
 <?php
 
 $app = require_once '../bootstrap.php';
+$cache = require_once '../cache.php';
 
 use compwright\Disguz\Disguz;
 
 // List all discussion threads
-$app->get('/', function() use ($app) {
+$app->get('/', function() use ($app, $cache) {
 	$disqus = Disguz::factory([
-		'api_secret' => getenv('DISQUS_API_SECRET'),
+		'disqus.keys' => [
+			'api_secret' => getenv('DISQUS_API_SECRET'),
+		],
 	]);
+	$disqus->addSubscriber($cache);
 	
 	$threads = $disqus->threadsList([
 		'forum' => getenv('DISQUS_FORUM'),
@@ -22,9 +26,11 @@ $app->get('/', function() use ($app) {
 // Start a new discussion thread
 $app->post('/', function() use ($app) {
 	$disqus = Disguz::factory([
-		'api_key' => getenv('DISQUS_API_KEY'),
-		'api_secret' => getenv('DISQUS_API_SECRET'),
-		'access_token' => getenv('DISQUS_ACCESS_TOKEN'),
+		'disqus.keys' => [
+			'api_key' => getenv('DISQUS_API_KEY'),
+			'api_secret' => getenv('DISQUS_API_SECRET'),
+			'access_token' => getenv('DISQUS_ACCESS_TOKEN'),
+		],
 	]);
 
 	$result = $disqus->threadsCreate([
@@ -38,7 +44,9 @@ $app->post('/', function() use ($app) {
 // List all the posts on a thread
 $app->get('/discussion/:threadId', function($thread) use ($app) {
 	$disqus = Disguz::factory([
-		'api_secret' => getenv('DISQUS_API_SECRET'),
+		'disqus.keys' => [
+			'api_secret' => getenv('DISQUS_API_SECRET'),
+		],
 	]);
 	
 	$posts = $disqus->postsList(compact('thread'));
@@ -54,7 +62,9 @@ $app->get('/discussion/:threadId', function($thread) use ($app) {
 $app->post('/discussion/:threadId', function($thread) use ($app) {
 	// Create a client and pass an array of configuration data
 	$disqus = Disguz::factory([
-		'api_secret' => getenv('DISQUS_API_SECRET'),
+		'disqus.keys' => [
+			'api_secret' => getenv('DISQUS_API_SECRET'),
+		],
 	]);
 
 	$result = $disqus->postsCreate([
@@ -71,7 +81,9 @@ $app->post('/discussion/:threadId', function($thread) use ($app) {
 $app->post('/discussion/:threadId/moderate/:postId', function($thread, $post) use ($app) {
 	// Create a client and pass an array of configuration data
 	$disqus = Disguz::factory([
-		'api_secret' => getenv('DISQUS_API_SECRET'),
+		'disqus.keys' => [
+			'api_secret' => getenv('DISQUS_API_SECRET'),
+		],
 	]);
 
 	$result = $disqus->postsReport(compact('post'));
