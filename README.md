@@ -1,5 +1,25 @@
 # disqus-demo
 
+## Dependencies
+
+* PHP 5.4+
+* PHP Memcache extension (not Memcached)
+* PHP Mongo extension
+* Memcached
+* MongoDB
+
+If you do not have these dependencies and are on Mac OS X, you can quickly install them with [Homebrew](http://brew.sh/):
+
+```
+brew install php55
+brew install php55-memcache
+brew install php55-mongo
+brew install memcached
+brew install mongodb
+```
+
+Be sure to follow the post-install instructions provided by Homebrew to start the memcached and mongod servers.
+
 ## Install with Composer
 
 ```
